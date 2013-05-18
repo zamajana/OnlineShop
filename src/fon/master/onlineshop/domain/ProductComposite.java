@@ -17,10 +17,10 @@ public class ProductComposite extends ProductComponent implements Serializable{
 	
 	public ProductComposite(int id, String name,
 			String description, Category category) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.category = category;
+		setId(id);
+		setName(name);
+		setDescription(description);
+		setCategory(category);
 		this.products = new ArrayList<ProductComponent>();
 	}
 
@@ -63,13 +63,8 @@ public class ProductComposite extends ProductComponent implements Serializable{
 	}
 	
 	@Override
-	public int getId() {
-		return this.id;
-	}
-	
-	@Override
-	public String getName() {
-		return this.name;
+	public List<ProductComponent> getChildren() {
+		return products;
 	}
 	
 	@Override
@@ -84,28 +79,53 @@ public class ProductComposite extends ProductComponent implements Serializable{
 	}
 	
 	@Override
-	public String getDescription() {
-		return this.description;
-	}
-	
-	@Override
-	public Category getCategory() {
-		return this.category;
-	}
-	
-	@Override
 	public String toString() {
 		return this.name;
 	}
-	
-	@Override
-	public List<ProductComponent> getChildren() {
-		return products;
+
+	public int getId() {
+		return id;
 	}
 
-	@Override
-	public ProductComponent getParent() {
-		return this.parent;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public ProductComponent getParent() {
+		return parent;
+	}
+
+	public void setParent(ProductComponent productComponent){
+		this.parent = productComponent;
+	}
+
 	
 }

@@ -50,11 +50,11 @@ public class Product extends ProductComponent implements Serializable{
 	public Product(int id, String name, double price, String description, 
 			Category category) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.description = description;
-		this.category = category;
+		setId(id);
+		setName(name);
+		setPrice(price);
+		setDescription(description);
+		setCategory(category);
 	}
 	
 	@Override
@@ -71,42 +71,6 @@ public class Product extends ProductComponent implements Serializable{
 	public void print() {
 		System.out.println("  ---- "+getName()+", price:"+getPrice() +" ----");
 		System.out.println("       ------" +getDescription());
-	}
-	
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public List<Size> getSizes() {
@@ -157,24 +121,6 @@ public class Product extends ProductComponent implements Serializable{
 		this.rating = rating;
 	}
 	
-	@Override
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
-	@Override
-	public String toString() {
-		return this.name;
-	}
-	
-	@Override
-	public ProductComponent getParent() {
-		return this.parent;
-	}
 	
 	@Override
 	public int hashCode() {
@@ -213,7 +159,58 @@ public class Product extends ProductComponent implements Serializable{
 		return true;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public ProductComponent getParent() {
+		return parent;
+	}
+
+	public void setParent(ProductComponent productComponent){
+		this.parent = productComponent;
+	}
 
 
 }

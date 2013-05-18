@@ -91,6 +91,10 @@ public class ProductCompositeContainer extends BeanItemContainer<ProductComponen
 		 return false;
 	}
 
+//	@Override
+//	public boolean addNestedContainerProperty(String propertyId) {
+//		return super.addNestedContainerProperty(propertyId);
+//	}
 
 
 }

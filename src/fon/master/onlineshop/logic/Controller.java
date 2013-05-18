@@ -180,17 +180,24 @@ public class Controller {
 		productCompositeContainer.addBean(productComponent);
 	}
 	
-//	public void updateProduct(ProductComponent selectedProduct, ProductComponent parent){
-//		List<ProductComponent> products = parent.getChildren();
-//		int id = selectedProduct.getId();
-//		for (ProductComponent productComponent : products) {
-//			if(productComponent.getId()==id){
-//				products.remove(productComponent);
-//				break;
-//			}
-//		}
-//		products.add(selectedProduct);
-//	}
+	public void updateProduct(ProductComponent selectedProduct, ProductComponent parent){
+		List<ProductComponent> products = parent.getChildren();
+		int id = selectedProduct.getId();
+		for (ProductComponent productComponent : products) {
+			if(productComponent.getId()==id){
+				products.remove(productComponent);
+				break;
+			}
+		}
+		products.add(selectedProduct);
+		refreshProductCompositeContainer(products);
+	}
+	
+	public void refreshProductCompositeContainer(List<ProductComponent> products){
+		productCompositeContainer=null;
+		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
+		showAllProductsTree();
+	}
 	
 //	public void removeProduct(ProductComponent productComponent){
 //		productCompositeContainer.getItemIds().remove(productComponent);

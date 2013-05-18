@@ -35,36 +35,8 @@ public abstract class ProductComponent implements Serializable{
 		throw new UnsupportedOperationException();
 	}
 	
-	public int getId() {
-		throw new UnsupportedOperationException();
-	}
-	
-	public String getName(){
-		throw new UnsupportedOperationException();
-	}
-	
-	public double getPrice() {
-		throw new UnsupportedOperationException();
-	}
-	
-	public String getDescription() {
-		throw new UnsupportedOperationException();
-	}
-	
-	public Category getCategory() {
-		throw new UnsupportedOperationException();
-	}
-	
 	public List<ProductComponent> getChildren(){
 		return null;
-	}
-	
-	public ProductComponent getParent(){
-		return null;
-	}
-	
-	public void setParent(ProductComponent productComponent){
-		this.parent = productComponent;
 	}
 	
 	@Override
@@ -75,4 +47,54 @@ public abstract class ProductComponent implements Serializable{
 	public void print(){
 		throw new UnsupportedOperationException();
 	}
+
+	public int getId() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setId(int id) {
+		throw new UnsupportedOperationException();
+	}
+
+	public String getName() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setName(String name) {
+		throw new UnsupportedOperationException();
+	}
+
+	public double getPrice() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setPrice(double price) {
+		throw new UnsupportedOperationException();
+	}
+
+	public String getDescription() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setDescription(String description) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Category getCategory() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setCategory(Category category) {
+		throw new UnsupportedOperationException();
+	}
+
+	public ProductComponent getParent() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setParent(ProductComponent productComponent){
+		throw new UnsupportedOperationException();
+	}
+	
+	
 }
