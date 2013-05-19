@@ -100,6 +100,7 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		addChildBtn.addListener((ClickListener)this);
 		saveBtn.addListener((ClickListener)this);
 		updateBtn.addListener((ClickListener)this);
+		deleteBtn.addListener((ClickListener)this);
 		
 		// set on vertical split panel
 		addComponent(productFormLayout);	
@@ -272,6 +273,10 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 //			         productManagementComponent.repaintProductsTree();
 //				}
 //				selectedProduct = editProduct(selectedProduct);
+			}else if(source == deleteBtn){
+				productManagementComponent.removeProductsTree();
+				Controller.getInstance().removeProduct(selectedProduct, selectedProduct.getParent());
+				productManagementComponent.refreshProductsTree();
 			}
 	}
 	

@@ -90,7 +90,7 @@ public class OnlineShopComponent extends CustomComponent {
 		setHeight("100.0%");
 
 		// mainMenu
-		mainMenu = buildManuBar();
+		mainMenu = buildMenuBar();
 		mainLayout.addComponent(mainMenu, "top:0.0px;left:0.0px;");
 
 		// titleLabel
@@ -112,7 +112,7 @@ public class OnlineShopComponent extends CustomComponent {
 		return mainLayout;
 	}
 	
-	private MenuBar buildManuBar(){
+	private MenuBar buildMenuBar(){
 		mainMenu = new MenuBar();
 		mainMenu.setStyleName("mainMenu");
 		mainMenu.setImmediate(false);

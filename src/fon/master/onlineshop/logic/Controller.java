@@ -194,16 +194,42 @@ public class Controller {
 	}
 	
 	public void refreshProductCompositeContainer(List<ProductComponent> products){
-		productCompositeContainer=null;
+		productCompositeContainer = null;
 		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
 		showAllProductsTree();
 	}
 	
-//	public void removeProduct(ProductComponent productComponent){
-//		productCompositeContainer.getItemIds().remove(productComponent);
-////		productComponentContainer.getItemIds().remove(productComponent);
-//	}
-//	
+	public void refreshProductCompositeContainerComposite(List<ProductComposite> products){
+		productCompositeContainer = null;
+		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
+		showAllProductsTree();
+	}
+	
+	public void removeProduct(ProductComponent selectedProduct, ProductComponent parent){
+		int id = selectedProduct.getId();
+		System.out.println("####### DELETE ID: "+id);
+		if(selectedProduct instanceof ProductComposite){
+			List<ProductComposite> products = Data.getInstance().getProductCompositeList();
+			for(ProductComposite productComposite : products){
+				if(productComposite.getId()==id){
+					products.remove(productComposite);
+					refreshProductCompositeContainerComposite(products);
+					break;
+				}
+			}
+		}
+			List<ProductComponent> products = parent.getChildren();
+			for (ProductComponent productComponent : products) {
+				if(productComponent.getId()==id){
+					System.out.println("#### PRODUCT ID: "+productComponent.getId());
+					products.remove(productComponent);
+					refreshProductCompositeContainer(products);
+					break;
+				}
+			}
+
+	}
+	
 	
 //	public void addToCart(Product product, Cart cart){	
 //	if(cart.getCartItems().isEmpty() || cart.getCartItems().size()==0){
