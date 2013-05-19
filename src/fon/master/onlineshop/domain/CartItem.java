@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public class CartItem implements Serializable{
+public class CartItem extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class CartItem implements Serializable{
 	private int quantity;
 	
 	public CartItem() {
-		
+		super();
 	}
 
 	public CartItem(Integer rb, Cart cart, Product product, double sumPrice,
@@ -72,37 +72,38 @@ public class CartItem implements Serializable{
 	public String toString() {
 		return this.rb+" "+this.product.toString()+" * "+this.quantity+" = "+this.sumPrice;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((cart == null) ? 0 : cart.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CartItem other = (CartItem) obj;
-		if (cart == null) {
-			if (other.cart != null)
-				return false;
-		} else if (!cart.equals(other.cart))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		return true;
-	}
+	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((cart == null) ? 0 : cart.hashCode());
+//		result = prime * result + ((product == null) ? 0 : product.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		CartItem other = (CartItem) obj;
+//		if (cart == null) {
+//			if (other.cart != null)
+//				return false;
+//		} else if (!cart.equals(other.cart))
+//			return false;
+//		if (product == null) {
+//			if (other.product != null)
+//				return false;
+//		} else if (!product.equals(other.product))
+//			return false;
+//		return true;
+//	}
 
 
 }

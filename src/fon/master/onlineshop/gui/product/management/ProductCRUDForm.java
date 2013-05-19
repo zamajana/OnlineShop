@@ -35,7 +35,7 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 	private HorizontalLayout productButtonsLayout = new HorizontalLayout();
 	private VerticalLayout childrenLayout = new VerticalLayout();
 	
-	private Label titleLbl = new Label("Selected product");
+	private Label titleLbl = new Label();
 	
 	private Label nameLbl = new Label("Name");
 	private Label descriptionLbl = new Label("Description");
@@ -65,13 +65,12 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		
 		this.productManagementComponent = productManagementComponent;
 		
-		setSplitPosition(30);
+		setSplitPosition(40);
 		
 		// TOP of the vertical split panel
 		
 		// form is not visible, buttons are disabled, inputs are disabled
-		productFormLayout.setVisible(false);
-		disableProductForm();
+		hideProductForm();
 		
 		// input form, labels and input fields
 		productFieldsLayout.setRows(4);
@@ -84,6 +83,8 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		productFieldsLayout.addComponent(priceValueLbl);
 		productFieldsLayout.addComponent(categoryLbl);	
 		productFieldsLayout.addComponent(categoryValueLbl);
+		productFieldsLayout.setSpacing(true);
+		productFieldsLayout.setMargin(true);
 		
 		// save, update, delete buttons
 		productButtonsLayout.addComponent(saveBtn);
@@ -114,7 +115,10 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		//initializeProductInputForm(selectedProduct);
 		//showProductForm();
 		productFormLayout.setVisible(true);
+		childrenLayout.setVisible(true);
+		childrenLayout.setEnabled(false);
 		showSelectedProduct(selectedProduct);
+		showReadOnlyForm();
 		
 		initializeChildrenProductTable(selectedProduct);
 		showChildrenProductsTable();
@@ -125,14 +129,10 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 	public void prepareProductForm(Mode mode){
 		setMode(mode);
 		productButtonsLayout.setEnabled(true);
-		if(mode==Mode.ADD_COMPOSITE_PRODUCT){
-			enableFormForAddCompositeProduct();		
-		}else if(mode==Mode.ADD_PRODUCT){
-			enableFormForAddProduct();
-		}else if(mode==Mode.EDIT_COMPOSITE_PRODUCT){
-			enableFormForEditCompositeProduct();
-		}else if(mode==Mode.EDIT_PRODUCT){
-			enableFormForEditProduct();
+		if(mode==Mode.ADD_COMPOSITE_PRODUCT || mode==Mode.ADD_PRODUCT){
+			enableInputFormForAdd();
+		}else if(mode==Mode.EDIT_COMPOSITE_PRODUCT || mode==Mode.EDIT_PRODUCT){
+			enableInputFormForEdit();
 		}
 	}
 	
@@ -141,15 +141,7 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		descriptionValueLbl.setValue(productComponent.getDescription());
 		priceValueLbl.setValue(productComponent.getPrice());
 		categoryValueLbl.setValue(productComponent.getCategory().getName());
-		productFieldsLayout.removeAllComponents();
-		productFieldsLayout.addComponent(nameLbl);
-		productFieldsLayout.addComponent(nameValueLbl);
-		productFieldsLayout.addComponent(descriptionLbl);
-		productFieldsLayout.addComponent(descriptionValueLbl);
-		productFieldsLayout.addComponent(priceLbl);
-		productFieldsLayout.addComponent(priceValueLbl);
-		productFieldsLayout.addComponent(categoryLbl);	
-		productFieldsLayout.addComponent(categoryValueLbl);
+		titleLbl.setValue("SELECTED PRODUCT");
 	}
 	
 	private void initializeProductInputForm(ProductComponent productComponent){
@@ -162,15 +154,6 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		}else{
 			priceTxt.setEnabled(true);
 		}
-		productFieldsLayout.removeAllComponents();
-		productFieldsLayout.addComponent(nameLbl);
-		productFieldsLayout.addComponent(nameTxt);
-		productFieldsLayout.addComponent(descriptionLbl);
-		productFieldsLayout.addComponent(descriptionTxt);
-		productFieldsLayout.addComponent(priceLbl);
-		productFieldsLayout.addComponent(priceTxt);
-		productFieldsLayout.addComponent(categoryLbl);	
-		productFieldsLayout.addComponent(categoryTxt);
 	}
 	
 	private void initializeChildrenProductTable(ProductComponent productComponent){
@@ -190,30 +173,35 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		setSecondComponent(childrenLayout);	
 	}
 	
-	private void enableFormForAddCompositeProduct(){
-		enableFormForAdd();
-		priceTxt.setEnabled(false);
+	private void enableInputFormForAdd(){
+		clearFormForAdd();
+		priceTxt.setEnabled(getMode()==Mode.ADD_PRODUCT);
+		titleLbl.setValue("ADD NEW PRODUCT");
+		enableActionsForAdd();
+		showFormWithInputs();
+		if(!productFormLayout.isVisible()){
+			productFormLayout.setVisible(true);
+		}
 	}
 	
-	private void enableFormForAddProduct(){
-		enableFormForAdd();
-		priceTxt.setEnabled(true);
+	private void enableInputFormForEdit(){
+		initializeProductInputForm(selectedProduct);
+		priceTxt.setEnabled(getMode()==Mode.EDIT_PRODUCT);
+		childrenLayout.setEnabled(getMode()==Mode.EDIT_COMPOSITE_PRODUCT);
+		titleLbl.setValue("EDIT SELECTED PRODUCT");
+		enableActionsForEdit();
+		showFormWithInputs();
 	}
 	
-	private void enableFormForAdd(){
-		productFormLayout.removeAllComponents();
+	private void clearFormForAdd(){
 		nameTxt.setValue("");
 		descriptionTxt.setValue("");
 		priceTxt.setValue("");
 		categoryTxt.setValue("");
-		if(selectedProduct instanceof ProductComposite){
-			priceTxt.setEnabled(false);
-		}else{
-			priceTxt.setEnabled(true);
-		}
-		saveBtn.setEnabled(true);
-		updateBtn.setEnabled(false);
-		deleteBtn.setEnabled(false);
+	}
+	
+	private void showFormWithInputs(){
+		productFieldsLayout.removeAllComponents();
 		productFieldsLayout.addComponent(nameLbl);
 		productFieldsLayout.addComponent(nameTxt);
 		productFieldsLayout.addComponent(descriptionLbl);
@@ -222,32 +210,35 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		productFieldsLayout.addComponent(priceTxt);
 		productFieldsLayout.addComponent(categoryLbl);	
 		productFieldsLayout.addComponent(categoryTxt);
-		productFormLayout.setVisible(true);
 	}
 	
-	private void enableFormForEditCompositeProduct(){
-		initializeProductInputForm(selectedProduct);
-		enableFormForEdit();
-		priceTxt.setEnabled(false);
-		childrenLayout.setEnabled(true);
+	private void showReadOnlyForm(){
+		productFieldsLayout.removeAllComponents();
+		productFieldsLayout.addComponent(nameLbl);
+		productFieldsLayout.addComponent(nameValueLbl);
+		productFieldsLayout.addComponent(descriptionLbl);
+		productFieldsLayout.addComponent(descriptionValueLbl);
+		productFieldsLayout.addComponent(priceLbl);
+		productFieldsLayout.addComponent(priceValueLbl);
+		productFieldsLayout.addComponent(categoryLbl);	
+		productFieldsLayout.addComponent(categoryValueLbl);
 	}
 	
-	private void enableFormForEditProduct(){
-		initializeProductInputForm(selectedProduct);
-		enableFormForEdit();
-		priceTxt.setEnabled(true);
-		childrenLayout.setEnabled(false);
-	}
-	
-	private void enableFormForEdit(){
+	private void enableActionsForEdit(){
 		saveBtn.setEnabled(false);
 		updateBtn.setEnabled(true);
 		deleteBtn.setEnabled(true);
 	}
 	
-	public void disableProductForm(){
-		productButtonsLayout.setEnabled(false);
-		childrenLayout.setEnabled(false);
+	private void enableActionsForAdd(){
+		saveBtn.setEnabled(true);
+		updateBtn.setEnabled(false);
+		deleteBtn.setEnabled(false);
+	}
+	
+	public void hideProductForm(){
+		productFormLayout.setVisible(false);
+		childrenLayout.setVisible(false);
 	}
 
 	public void buttonClick(ClickEvent event) {
@@ -258,25 +249,20 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 			if(source == saveBtn){
 				ProductComponent product = createNewProduct();		
 				Controller.getInstance().saveProduct(selectedProduct, product);
+				productManagementComponent.getProductsTree().select(product);
 			}else if(source == updateBtn){
 				productManagementComponent.removeProductsTree();
-				ProductComponent product = editProduct(selectedProduct);
-				System.out.println("######## 1. RADI DO OVDE>>>");
-				Controller.getInstance().updateProduct(product, product.getParent());
-				System.out.println("######## 2. RADI DO OVDE>>>");
+				ProductComponent productComponent = selectedProduct;
+				productComponent = editProduct(productComponent);
+				Controller.getInstance().updateProduct(productComponent, productComponent.getParent());
 				productManagementComponent.refreshProductsTree();
-//				final Object id = productManagementComponent.getProductsTree().getValue();
-//				if (id != null) {
-//					 final Item item = productManagementComponent.getProductsTree().getItem(id);
-//			         final Property p = item.getItemProperty(CAPTION_PROPERTY);
-//			         p.setValue(productManagementComponent.getUpdatedProduct());
-//			         productManagementComponent.repaintProductsTree();
-//				}
-//				selectedProduct = editProduct(selectedProduct);
+				selectedProduct = productComponent;
+				productManagementComponent.getProductsTree().select(selectedProduct);
 			}else if(source == deleteBtn){
 				productManagementComponent.removeProductsTree();
 				Controller.getInstance().removeProduct(selectedProduct, selectedProduct.getParent());
 				productManagementComponent.refreshProductsTree();
+				hideProductForm();
 			}
 	}
 	
@@ -294,6 +280,8 @@ public class ProductCRUDForm extends VerticalSplitPanel implements ClickListener
 		}else if(getMode()==Mode.ADD_PRODUCT){
 			product = new Product(1, nameTxt.getValue().toString(), Double.valueOf(priceTxt.getValue().toString()), 
 			descriptionTxt.getValue().toString(), new Category(1, categoryTxt.getValue().toString(), Section.WOMEN));
+			showChildrenProductsTable();
+			childrenLayout.setVisible(true);
 		}
 		return product;
 	}

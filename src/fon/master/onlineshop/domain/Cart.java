@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart implements Serializable{
+public class Cart extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class Cart implements Serializable{
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 	
 	public Cart() {
-		
+		super();
 	}
 
 	public Cart(int id, double totalPrice, Customer customer,
@@ -68,30 +68,30 @@ public class Cart implements Serializable{
 		return String.valueOf(id);
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cart other = (Cart) obj;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Cart other = (Cart) obj;
+//		if (customer == null) {
+//			if (other.customer != null)
+//				return false;
+//		} else if (!customer.equals(other.customer))
+//			return false;
+//		return true;
+//	}
 	
 	
 }

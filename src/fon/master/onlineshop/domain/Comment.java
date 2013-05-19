@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public class Comment implements Serializable{
+public class Comment extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class Comment implements Serializable{
 	private String comment;
 	
 	public Comment() {
-		
+		super();
 	}
 
 	public Comment(int id, Customer customer, Product product, String title,
@@ -74,46 +74,47 @@ public class Comment implements Serializable{
 		return this.customer.toString()+"\n"+this.title+"\n"+this.comment;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		return true;
-	}
+	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+//		result = prime * result + ((product == null) ? 0 : product.hashCode());
+//		result = prime * result + ((title == null) ? 0 : title.hashCode());
+//		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Comment other = (Comment) obj;
+//		if (customer == null) {
+//			if (other.customer != null)
+//				return false;
+//		} else if (!customer.equals(other.customer))
+//			return false;
+//		if (product == null) {
+//			if (other.product != null)
+//				return false;
+//		} else if (!product.equals(other.product))
+//			return false;
+//		if (title == null) {
+//			if (other.title != null)
+//				return false;
+//		} else if (!title.equals(other.title))
+//			return false;
+//		if (comment == null) {
+//			if (other.comment != null)
+//				return false;
+//		} else if (!comment.equals(other.comment))
+//			return false;
+//		return true;
+//	}
 }

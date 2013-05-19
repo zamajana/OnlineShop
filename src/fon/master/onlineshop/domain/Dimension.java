@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public class Dimension implements Serializable{
+public class Dimension extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class Dimension implements Serializable{
 	private String radius;
 	
 	public Dimension() {
-		
+		super();
 	}
 	
 	public Dimension(int id, String width, String height, String volume,
@@ -79,53 +79,53 @@ public class Dimension implements Serializable{
 		return result;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((width == null) ? 0 : width.hashCode());
-		result = prime * result + ((height == null) ? 0 : height.hashCode());
-		result = prime * result + ((volume == null) ? 0 : volume.hashCode());
-		result = prime * result + ((depth == null) ? 0 : depth.hashCode());
-		result = prime * result + ((radius == null) ? 0 : radius.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Dimension other = (Dimension) obj;
-		if (width == null) {
-			if (other.width != null)
-				return false;
-		} else if (!width.equals(other.width))
-			return false;
-		if (height == null) {
-			if (other.height != null)
-				return false;
-		} else if (!height.equals(other.height))
-			return false;
-		if (volume == null) {
-			if (other.volume != null)
-				return false;
-		} else if (!volume.equals(other.volume))
-			return false;
-		if (depth == null) {
-			if (other.depth != null)
-				return false;
-		} else if (!depth.equals(other.depth))
-			return false;
-		if (radius == null) {
-			if (other.radius != null)
-				return false;
-		} else if (!radius.equals(other.radius))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((width == null) ? 0 : width.hashCode());
+//		result = prime * result + ((height == null) ? 0 : height.hashCode());
+//		result = prime * result + ((volume == null) ? 0 : volume.hashCode());
+//		result = prime * result + ((depth == null) ? 0 : depth.hashCode());
+//		result = prime * result + ((radius == null) ? 0 : radius.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Dimension other = (Dimension) obj;
+//		if (width == null) {
+//			if (other.width != null)
+//				return false;
+//		} else if (!width.equals(other.width))
+//			return false;
+//		if (height == null) {
+//			if (other.height != null)
+//				return false;
+//		} else if (!height.equals(other.height))
+//			return false;
+//		if (volume == null) {
+//			if (other.volume != null)
+//				return false;
+//		} else if (!volume.equals(other.volume))
+//			return false;
+//		if (depth == null) {
+//			if (other.depth != null)
+//				return false;
+//		} else if (!depth.equals(other.depth))
+//			return false;
+//		if (radius == null) {
+//			if (other.radius != null)
+//				return false;
+//		} else if (!radius.equals(other.radius))
+//			return false;
+//		return true;
+//	}
 	
 }

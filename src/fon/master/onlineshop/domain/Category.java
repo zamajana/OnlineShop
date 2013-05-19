@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public class Category implements Serializable{
+public class Category extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class Category implements Serializable{
 	private Section section;
 	
 	public Category() {
-		
+		super();
 	}
 	
 	public Category(int id, String name, Section section) {
@@ -54,36 +54,37 @@ public class Category implements Serializable{
 	public String toString() {
 		return this.name;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((section == null) ? 0 : section.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Category other = (Category) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (section == null) {
-			if (other.section != null)
-				return false;
-		} else if (!section.equals(other.section))
-			return false;
-		return true;
-	}
+	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((name == null) ? 0 : name.hashCode());
+//		result = prime * result + ((section == null) ? 0 : section.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Category other = (Category) obj;
+//		if (name == null) {
+//			if (other.name != null)
+//				return false;
+//		} else if (!name.equals(other.name))
+//			return false;
+//		if (section == null) {
+//			if (other.section != null)
+//				return false;
+//		} else if (!section.equals(other.section))
+//			return false;
+//		return true;
+//	}
 	
 }

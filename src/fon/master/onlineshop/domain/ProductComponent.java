@@ -1,10 +1,13 @@
 package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
+import fon.master.onlineshop.logic.CompositeIterator;
 
-public abstract class ProductComponent implements Serializable{
+
+public abstract class ProductComponent extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -18,6 +21,10 @@ public abstract class ProductComponent implements Serializable{
 	protected Category category;
 	
 	protected ProductComponent parent;
+	
+	protected ProductComponent(){
+		super();
+	}
 
 	public void addChildProduct(ProductComponent productComponent){
 		throw new UnsupportedOperationException();
@@ -93,6 +100,10 @@ public abstract class ProductComponent implements Serializable{
 	}
 
 	public void setParent(ProductComponent productComponent){
+		throw new UnsupportedOperationException();
+	}
+
+	public Iterator<ProductComponent> createIterator() {
 		throw new UnsupportedOperationException();
 	}
 	

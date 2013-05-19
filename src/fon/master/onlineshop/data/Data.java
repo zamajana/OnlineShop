@@ -7,12 +7,11 @@ import fon.master.onlineshop.domain.Address;
 import fon.master.onlineshop.domain.Cart;
 import fon.master.onlineshop.domain.CartItem;
 import fon.master.onlineshop.domain.Category;
+import fon.master.onlineshop.domain.Category.Section;
 import fon.master.onlineshop.domain.Customer;
 import fon.master.onlineshop.domain.Place;
 import fon.master.onlineshop.domain.Product;
-import fon.master.onlineshop.domain.ProductComponent;
 import fon.master.onlineshop.domain.ProductComposite;
-import fon.master.onlineshop.domain.Category.Section;
 
 public class Data {
 
@@ -73,32 +72,7 @@ public class Data {
 	private ProductComposite productComposite2 =  new ProductComposite(22, "Winter is coming", "Get dress for snow", compositeCategoryList.get(0));
 	private ProductComposite productComposite3 =  new ProductComposite(23, "Get lucky", "We're up all night for good fun", compositeCategoryList.get(0));
 	private ProductComposite productComposite4 =  new ProductComposite(24, "Raindrops", "You make me happy when skies are grey", compositeCategoryList.get(0));
-	
-	private List<ProductComponent> productComponentList = new ArrayList<ProductComponent>(){{
-		add(new Product(1, "Earrings", 400.00, "Some earrings desciption", categoryList.get(5)));
-		add(new Product(2, "Necklace", 100.00, "Some necklace description", categoryList.get(5)));
-		add(new Product(3, "Pumps", 4500.00, "Black pumps description", categoryList.get(7)));
-		add(new Product(4, "Trench coat", 5000.00, "Trench coat description", categoryList.get(4)));
-		add(new Product(5, "Black suit", 7200.00, "Man suit description", categoryList.get(6)));
-		add(new Product(6, "Little black dress", 2500.00, "Little black dress never gets old", categoryList.get(2)));
-		add(new Product(7, "Peplum dress", 3000.00, "Trending this winter", categoryList.get(2)));
-		add(new Product(8, "Vedges", 3500.00, "Great for summer", categoryList.get(7)));
-		add(new Product(9, "Children snickers", 2800.00, "Children snickers description", categoryList.get(8)));
-		add(new Product(10, "Hat", 1500.00, "Hat description", categoryList.get(5)));
-		add(new Product(11, "Earrings", 400.00, "Some earrings desciption", categoryList.get(5)));
-		add(new Product(12, "Necklace", 100.00, "Some necklace description", categoryList.get(5)));
-		add(new Product(13, "Pumps", 4500.00, "Black pumps description", categoryList.get(7)));
-		add(new Product(14, "Trench coat", 5000.00, "Trench coat description", categoryList.get(4)));
-		add(new Product(15, "Black suit", 7200.00, "Man suit description", categoryList.get(6)));
-		add(new Product(16, "Little black dress", 2500.00, "Little black dress never gets old", categoryList.get(2)));
-		add(new Product(17, "Peplum dress", 3000.00, "Trending this winter", categoryList.get(2)));
-		add(new Product(18, "Vedges", 3500.00, "Great for summer", categoryList.get(7)));
-		add(new Product(19, "Children snickers", 2800.00, "Children snickers description", categoryList.get(8)));
-		add(new Product(20, "Hat", 1500.00, "Hat description", categoryList.get(5)));
-	}};
-	
-	
-	
+		
 	public void addProductsToComposite(){
 		
 		Product product1 = new Product(1, "Earrings", 400.00, "Some earrings desciption", categoryList.get(5));
@@ -125,46 +99,43 @@ public class Data {
 		rootComposite.setParent(null);
 		
 		productComposite1.addChildProduct(product1);
-		productComposite1.addChildProduct(product18);
-		productComposite1.addChildProduct(product20);
+		productComposite1.addChildProduct(product2);
 		productComposite1.addChildProduct(product3);
 		productComposite1.addChildProduct(product4);
-		productComposite1.addChildProduct(product17);
+		productComposite1.addChildProduct(product5);
+		productComposite1.addChildProduct(product6);
 		
-		productComposite2.addChildProduct(product2);
-		productComposite2.addChildProduct(product14);
-		productComposite2.addChildProduct(product5);
+		productComposite2.addChildProduct(product7);
 		productComposite2.addChildProduct(product8);
-		productComposite2.addChildProduct(product16);
-		productComposite2.addChildProduct(product19);
+		productComposite2.addChildProduct(product9);
+		productComposite2.addChildProduct(product10);
+		productComposite2.addChildProduct(product11);
+		productComposite2.addChildProduct(product12);
 		
 		productComposite3.addChildProduct(productComposite1);
-		productComposite3.addChildProduct(product7);
-		productComposite3.addChildProduct(product6);
-		productComposite3.addChildProduct(product9);
-		productComposite3.addChildProduct(product10);
-		productComposite3.addChildProduct(product15);
+		productComposite3.addChildProduct(product13);
+		productComposite3.addChildProduct(product14);
 		
-		productComposite4.addChildProduct(product2);
-		productComposite4.addChildProduct(product14);
+		productComposite4.addChildProduct(product15);
+		productComposite4.addChildProduct(product16);
+		productComposite4.addChildProduct(product17);
+		productComposite4.addChildProduct(product18);
+		productComposite4.addChildProduct(product19);
 		productComposite4.addChildProduct(product20);
-		productComposite4.addChildProduct(product11);
-		productComposite4.addChildProduct(product12);
-		productComposite4.addChildProduct(product13);
 		
-		rootComposite.addChildProduct(productComposite1);
+	//	rootComposite.addChildProduct(productComposite1);
 		rootComposite.addChildProduct(productComposite2);
 		rootComposite.addChildProduct(productComposite3);
 		rootComposite.addChildProduct(productComposite4);
 	}
 	
-	private List<ProductComposite> productCompositeList = new ArrayList<ProductComposite>(){{
-		add(rootComposite);
-		add(productComposite1);
-		add(productComposite2);
-		add(productComposite3);
-		add(productComposite4);
-	}};
+//	private List<ProductComposite> productCompositeList = new ArrayList<ProductComposite>(){{
+//		add(rootComposite);
+////		add(productComposite1);
+//		add(productComposite2);
+//		add(productComposite3);
+//		add(productComposite4);
+//	}};
 
 	
 	private List<Customer> customerList = new ArrayList<Customer>(){{
@@ -201,13 +172,9 @@ public class Data {
 		return compositeCategoryList;
 	}
 
-	public List<ProductComponent> getProductComponentList() {
-		return productComponentList;
-	}
-
-	public List<ProductComposite> getProductCompositeList() {
-		return productCompositeList;
-	}
+//	public List<ProductComposite> getProductCompositeList() {
+//		return productCompositeList;
+//	}
 
 	public ProductComposite getRootComposite() {
 		return rootComposite;

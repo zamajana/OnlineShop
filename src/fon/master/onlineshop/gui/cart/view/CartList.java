@@ -35,9 +35,11 @@ public class CartList extends Table{
 				
 				quantityTxt.addListener(new TextChangeListener() {
 					public void textChange(TextChangeEvent event) {
-						int q = Integer.parseInt(event.getText());
-						item.setQuantity(q);
-						updateCartItem(item);
+						if(event.getText()!=null && !event.getText().equals("")){
+							int q = Integer.parseInt(event.getText());
+							item.setQuantity(q);
+							updateCartItem(item);
+						}
 					}
 				}); 
 				

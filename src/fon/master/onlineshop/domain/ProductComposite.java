@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fon.master.onlineshop.logic.CompositeIterator;
+
 
 public class ProductComposite extends ProductComponent implements Serializable{
 
@@ -65,6 +67,11 @@ public class ProductComposite extends ProductComponent implements Serializable{
 	@Override
 	public List<ProductComponent> getChildren() {
 		return products;
+	}
+	
+	@Override
+	public Iterator<ProductComponent> createIterator() {
+		return new CompositeIterator(products.iterator());
 	}
 	
 	@Override

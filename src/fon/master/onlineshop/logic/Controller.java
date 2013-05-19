@@ -1,6 +1,7 @@
 package fon.master.onlineshop.logic;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fon.master.onlineshop.data.CartContainer;
@@ -50,22 +51,15 @@ public class Controller {
 	}
 	
 	public void showAllProductsTree(){
-		for (ProductComponent productComponent : Data.getInstance().getProductCompositeList()) {
-			productCompositeContainer.addBean(productComponent);
-			if(productComponent.getChildren()!=null){
-				for (ProductComponent pc : productComponent.getChildren()) {
-					productCompositeContainer.addBean(pc);
-				}
-			}
+		ProductComposite root = Data.getInstance().getRootComposite();
+		productCompositeContainer.addBean(root);
+		Iterator<ProductComponent> iterator = root.createIterator();
+		while(iterator.hasNext()){
+			ProductComponent productComponent = iterator.next();
+			try{
+				productCompositeContainer.addBean(productComponent);
+			}catch(UnsupportedOperationException e){ }
 		}
-//		for (ProductComponent productComponent : Data.getInstance().getProductCompositeList()) {
-//		productCompositeContainer.addBean(productComponent);
-//		if(productComponent.getChildren()!=null){
-//			for (ProductComponent pc : productComponent.getChildren()) {
-//				productCompositeContainer.addBean(pc);
-//			}
-//		}
-//		}
 	}
 	
 	public void showAllChildrenProducts(ProductComponent parent){
@@ -173,61 +167,43 @@ public class Controller {
 	}
 	
 	public void saveProduct(ProductComponent selectedProduct, ProductComponent productComponent){
-		if(selectedProduct!=null && selectedProduct instanceof ProductComposite){
-			selectedProduct.addChildProduct(productComponent);
-			productComponentContainer.addBean(productComponent);
+		if(selectedProduct!=null){
+			if(selectedProduct instanceof ProductComposite){
+				selectedProduct.addChildProduct(productComponent);
+			}else if(selectedProduct.getParent()!=null){
+				selectedProduct.getParent().addChildProduct(productComponent);
+			}
 		}
 		productCompositeContainer.addBean(productComponent);
 	}
 	
 	public void updateProduct(ProductComponent selectedProduct, ProductComponent parent){
 		List<ProductComponent> products = parent.getChildren();
-		int id = selectedProduct.getId();
-		for (ProductComponent productComponent : products) {
-			if(productComponent.getId()==id){
-				products.remove(productComponent);
-				break;
-			}
-		}
+		removeProductFromList(selectedProduct, parent);
 		products.add(selectedProduct);
-		refreshProductCompositeContainer(products);
-	}
-	
-	public void refreshProductCompositeContainer(List<ProductComponent> products){
-		productCompositeContainer = null;
-		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
-		showAllProductsTree();
-	}
-	
-	public void refreshProductCompositeContainerComposite(List<ProductComposite> products){
-		productCompositeContainer = null;
-		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
-		showAllProductsTree();
+		refreshProductCompositeContainer();
 	}
 	
 	public void removeProduct(ProductComponent selectedProduct, ProductComponent parent){
-		int id = selectedProduct.getId();
-		System.out.println("####### DELETE ID: "+id);
-		if(selectedProduct instanceof ProductComposite){
-			List<ProductComposite> products = Data.getInstance().getProductCompositeList();
-			for(ProductComposite productComposite : products){
-				if(productComposite.getId()==id){
-					products.remove(productComposite);
-					refreshProductCompositeContainerComposite(products);
-					break;
-				}
+		removeProductFromList(selectedProduct, parent);
+		refreshProductCompositeContainer();
+	}
+	
+	private void removeProductFromList(ProductComponent selectedProduct, ProductComponent parent){
+		Iterator<ProductComponent> iterator = parent.getChildren().iterator();
+		while(iterator.hasNext()){
+			ProductComponent productComponent = iterator.next();
+			if(selectedProduct.equals(productComponent)){
+				iterator.remove();
+				break;
 			}
 		}
-			List<ProductComponent> products = parent.getChildren();
-			for (ProductComponent productComponent : products) {
-				if(productComponent.getId()==id){
-					System.out.println("#### PRODUCT ID: "+productComponent.getId());
-					products.remove(productComponent);
-					refreshProductCompositeContainer(products);
-					break;
-				}
-			}
-
+	}
+	
+	public void refreshProductCompositeContainer(){
+		productCompositeContainer = null;
+		productCompositeContainer = new ProductCompositeContainer(ProductComponent.class, "parent");
+		showAllProductsTree();
 	}
 	
 	

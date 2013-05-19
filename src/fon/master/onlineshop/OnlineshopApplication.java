@@ -69,9 +69,18 @@ public class OnlineshopApplication extends Application {
 			}
 		};
 		
+//		Command treeTableExampleCmd = new Command() {
+//			public void menuSelected(MenuItem selectedItem) {
+//				contentLayout.removeAllComponents();
+//				TreeTableExample treeTableExample = new TreeTableExample("treeandtable");
+//				contentLayout.addComponent(treeTableExample);
+//			}
+//		};
+		
 		dashboardMenu.addItem("PRODUCT MANAGEMENT", productManagementCmd);
 		dashboardMenu.addItem("CATEGORY MANAGEMENT", categoryManagementCmd);
 		dashboardMenu.addItem("PREVIEW", shopPreviewCmd);
+//		dashboardMenu.addItem("TREE TABLE", treeTableExampleCmd);
 		
 		return dashboardMenu;
 	}

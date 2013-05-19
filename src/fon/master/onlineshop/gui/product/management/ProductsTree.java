@@ -1,11 +1,15 @@
 package fon.master.onlineshop.gui.product.management;
 
+import org.apache.commons.digester.xmlrules.FromXmlRuleSet;
+
 import com.vaadin.event.Action;
 import com.vaadin.ui.Tree;
 
 import fon.master.onlineshop.data.ProductCompositeContainer;
 import fon.master.onlineshop.domain.ProductComponent;
+import fon.master.onlineshop.domain.ProductComposite;
 import fon.master.onlineshop.gui.ProductManagementComponent;
+import fon.master.onlineshop.gui.ProductManagementComponent.Mode;
 import fon.master.onlineshop.logic.Controller;
 
 public class ProductsTree extends Tree implements Action.Handler{
@@ -15,11 +19,12 @@ public class ProductsTree extends Tree implements Action.Handler{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final Action ADD = new Action("Add");
-	private static final Action EDIT = new Action("Edit");
-	private static final Action DELETE = new Action("Delete");
+	private static final Action ADD_PRODUCT = new Action("Add Product");
+	private static final Action ADD_COMPOSITE_PRODUCT = new Action("Add Complex Product");
+	private static final Action EDIT_PRODUCT = new Action("Edit Product");
+//	private static final Action DELETE = new Action("Delete");
     
-    private static final Action[] actions = new Action[] { ADD, EDIT, DELETE };
+    private static final Action[] actions = new Action[] { ADD_PRODUCT, ADD_COMPOSITE_PRODUCT, EDIT_PRODUCT };
 	
 	private ProductManagementComponent productManagementComponent;
 	private ProductCompositeContainer productCompositeContainer;	
@@ -41,6 +46,8 @@ public class ProductsTree extends Tree implements Action.Handler{
             expandItemsRecursively(rootItemId);
 		}
 		
+		addActionHandler(this);
+		
 		addListener(new ValueChangeListener() {	
 			public void valueChange(com.vaadin.data.Property.ValueChangeEvent event) {
 				if(getValue()!=null){
@@ -53,7 +60,7 @@ public class ProductsTree extends Tree implements Action.Handler{
 	}
 	
 	private void productSelected(){
-		if(selectedProduct!=null){
+		if(isProductSelected()){
 			productManagementComponent.productSelected(selectedProduct);
 		}
 	}
@@ -73,19 +80,23 @@ public class ProductsTree extends Tree implements Action.Handler{
 	public Action[] getActions(Object target, Object sender) {
 		return actions;
 	}
-	
-	
 
 	public void handleAction(Action action, Object sender, Object target) {
-		if (action == DELETE) {
-            removeItem(target);
-        } else {
-            // Add
-  //          final Object id = addCaptionedItem("New Product", target);
- //           expandItem(target);
- //           setValue(id);
- //           editor.focus();
-        }
+		if(action == EDIT_PRODUCT){
+			if(isProductSelected()){
+				productSelected();
+				if(getSelectedProduct() instanceof ProductComposite){
+					productManagementComponent.prepareProductForm(Mode.EDIT_COMPOSITE_PRODUCT);
+				}else{
+					productManagementComponent.prepareProductForm(Mode.EDIT_PRODUCT);
+				}
+			}
+		}else if(action == ADD_COMPOSITE_PRODUCT){
+			productManagementComponent.prepareProductForm(Mode.ADD_COMPOSITE_PRODUCT);
+		}
+		else if(action == ADD_PRODUCT){
+			productManagementComponent.prepareProductForm(Mode.ADD_PRODUCT);
+		}
 	}
 	
 

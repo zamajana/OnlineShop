@@ -2,7 +2,11 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import fon.master.onlineshop.logic.CompositeIterator;
+import fon.master.onlineshop.logic.NullIterator;
 
 
 public class Product extends ProductComponent implements Serializable{
@@ -26,7 +30,7 @@ public class Product extends ProductComponent implements Serializable{
 	private Category category;
 	
 	public Product() {
-		
+		super();
 	}
 
 	@Deprecated
@@ -71,6 +75,11 @@ public class Product extends ProductComponent implements Serializable{
 	public void print() {
 		System.out.println("  ---- "+getName()+", price:"+getPrice() +" ----");
 		System.out.println("       ------" +getDescription());
+	}
+	
+	@Override
+	public Iterator<ProductComponent> createIterator() {
+		return new NullIterator();
 	}
 
 	public List<Size> getSizes() {
@@ -122,42 +131,42 @@ public class Product extends ProductComponent implements Serializable{
 	}
 	
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		return result;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((name == null) ? 0 : name.hashCode());
+//		result = prime * result + ((description == null) ? 0 : description.hashCode());
+//		result = prime * result + ((category == null) ? 0 : category.hashCode());
+//		return result;
+//	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		return true;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Product other = (Product) obj;
+//		if (name == null) {
+//			if (other.name != null)
+//				return false;
+//		} else if (!name.equals(other.name))
+//			return false;
+//		if (description == null) {
+//			if (other.description != null)
+//				return false;
+//		} else if (!description.equals(other.description))
+//			return false;
+//		if (category == null) {
+//			if (other.category != null)
+//				return false;
+//		} else if (!category.equals(other.category))
+//			return false;
+//		return true;
+//	}
 	
 	@Override
 	public String toString() {

@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public abstract class ColorSize implements Serializable{
+public abstract class ColorSize extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public abstract class ColorSize implements Serializable{
 	private String name;
 	
 	public ColorSize() {
-		
+		super();
 	}
 	
 	public ColorSize(int id, String name) {
@@ -39,29 +39,30 @@ public abstract class ColorSize implements Serializable{
 	public String toString() {
 		return name;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ColorSize other = (ColorSize) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
+	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((name == null) ? 0 : name.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		ColorSize other = (ColorSize) obj;
+//		if (name == null) {
+//			if (other.name != null)
+//				return false;
+//		} else if (!name.equals(other.name))
+//			return false;
+//		return true;
+//	}
 }

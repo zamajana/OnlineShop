@@ -6,6 +6,8 @@ import com.vaadin.ui.Table;
 
 import fon.master.onlineshop.data.ProductComponentContainer;
 import fon.master.onlineshop.domain.ProductComponent;
+import fon.master.onlineshop.domain.ProductComposite;
+import fon.master.onlineshop.gui.ProductManagementComponent.Mode;
 import fon.master.onlineshop.logic.Controller;
 
 public class ChildrenProductTable extends Table{
@@ -25,7 +27,7 @@ public class ChildrenProductTable extends Table{
 		
 		productComponentContainer = Controller.getInstance().getProductComponentContainer();
 		
-		setHeight("400px");
+		setHeight("350px");
 		setWidth("100%");
 
         addGeneratedColumn("edit", new ColumnGenerator() {
@@ -56,6 +58,11 @@ public class ChildrenProductTable extends Table{
 	
 	private void selectedProduct(){
 		productCRUDForm.productSelected(selectedProduct);
+		if(selectedProduct instanceof ProductComposite){
+			productCRUDForm.prepareProductForm(Mode.EDIT_COMPOSITE_PRODUCT);
+		}else{
+			productCRUDForm.prepareProductForm(Mode.EDIT_PRODUCT);
+		}
 	}
 	
 	

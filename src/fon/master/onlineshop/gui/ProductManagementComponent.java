@@ -97,7 +97,6 @@ public class ProductManagementComponent extends CustomComponent implements Butto
 	
 	public void productSelected(ProductComponent selectedProduct){
 		editBtn.setEnabled(true);
-		productCRUDForm.disableProductForm();
 		productCRUDForm.productSelected(selectedProduct);
 	}	
 	

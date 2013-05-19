@@ -2,7 +2,7 @@ package fon.master.onlineshop.domain;
 
 import java.io.Serializable;
 
-public class Place implements Serializable{
+public class Place extends BaseEntity implements Serializable{
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class Place implements Serializable{
 	private String placeName;
 	
 	public Place() {
-		
+		super();
 	}
 
 	public Place(int id, int zipCode, String placeName) {
@@ -54,28 +54,28 @@ public class Place implements Serializable{
 		return "Place: "+this.zipCode+", " + this.placeName;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((placeName == null) ? 0 : placeName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Place other = (Place) obj;
-		if (placeName == null) {
-			if (other.placeName != null)
-				return false;
-		} else if (!placeName.equals(other.placeName))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = super.hashCode();
+//		result = prime * result + ((placeName == null) ? 0 : placeName.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (!super.equals(obj))
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Place other = (Place) obj;
+//		if (placeName == null) {
+//			if (other.placeName != null)
+//				return false;
+//		} else if (!placeName.equals(other.placeName))
+//			return false;
+//		return true;
+//	}
 }
